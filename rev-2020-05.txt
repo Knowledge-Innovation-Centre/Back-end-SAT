@@ -1,0 +1,109 @@
+
+Q/A
+"janezova lista", No 1: 
+    Urejanje študijskega programa
+    Ko se shranjuje študijski program, program javi »Error on saving« kadar je dolžnina teksta v polju
+    »Description« velika in uporabnik ne ve kaj je narobe. Podobne velja tudi za druge tovrstne
+    kontrole.
+sva opisna polja u bazi su povećana na "neograničeno" i time je i ovaj Q rješen
+napomena: MySQL (baza koja se koristi) ima ograničenje na ukupnu dužinu zapisa (sva polja u jednoj tablici) na 64KB 
+tako da neograničeno i nije bas neograničeno... ali 64KB bi ipak trebalo biti koliko toliko dovoljno
+
+"janezova lista", No 2: 
+    ID študijskega programa
+    Študijski program nima možnosti vnosa ID-ja. V Sloveniji imamo standardizirane ID-je programov
+    in brez tega povezava z Evidenco ni možna.
+dodano polje idnumber u tab,icu STUDY_PROGRAMS
+
+"janezova lista", No 3: 
+    Urejanje ključev šole
+    Pri shranjevanju ključa javi napako.
+fixed /editSchool/new_id
+sada dozvoljava i da ID ostane identičan (neporomijenjen)
+osim toga... stari je (kada je i radio) vraćao NULL (prazan objekt)
+
+"janezova lista", No 4: 
+    Podatki študenta in predavatelja
+    Ni imena in priimka.
+U USERS dodano first_name i last_name
+
+juretova lista (ne navodim stavke koje se preklapaju sa janezovom listom)
+    Add few fields to internship agreement
+    ECTS points sum of hours
+new fields:
+ects_points
+sum_of_hours
+
+
+
+
+
+USERS 
+    dodano
+        first_name
+        last_name
+    promjena veličine tekt polja
+        phone
+        mail
+        cityname
+        cityzipcode
+        streetname
+        phone
+Napomena:
+username, password, school_id i slična (PK, FK polja) ostaju VARCHAR(64) // FK tipa TEXT je neefikasan pa ga neću imati
+
+ORGANIZATION
+    promjena veličine tekst polja
+        name
+        cityname
+        cityzipcode
+        streetname
+        orgtype
+
+STUDY_PROGRAMS
+    dodano polje
+        idnumber ("janezova lista", No 2: ) - identifikator studijskog programa
+    promjena veličine tekst polja
+        name
+        description
+
+STUDY_COMPETENCES
+    promjena veličine tekst polja
+        name
+        description
+
+AGREEMENT_ARTICLES_TEMPLATE
+    promjena veličine tekst polja
+        content
+
+INTERNSHIP_AGREEMENT_ARTICLES
+    promjena veličine tekst polja
+        content
+
+INTERNSHIPAGREEMENT_GRADES
+    promjena veličine tekst polja
+        grade_text
+
+SCHOOLS
+    promjena veličine tekst polja
+        public_key
+
+EVALUATION_QUESTIONS
+    promjena veličine tekst polja
+        question
+        options
+        show_if_value
+        question_for
+
+EVALUATION_ANSWERS
+    promjena veličine tekst polja
+        answer
+
+INTERNSHIP_AGREEMENT
+    dodano
+        ects_points
+        sum_of_hours
+    promjena veličine tekst polja
+        document_number
+
+

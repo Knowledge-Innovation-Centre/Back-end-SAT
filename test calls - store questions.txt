@@ -1,0 +1,202 @@
+POST /storeQuestionsForSchool
+[
+  {
+    "id": null,
+    "question": "AAAAA",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1
+  },
+  {
+    "id": null,
+    "question": "BBB",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1
+ }
+]
+
+returns
+[
+  {
+	"id": 12,
+	"question": "AAAAA",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+	"id": 13,
+	"question": "BBB",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	}
+]
+
+meaning questions were stored (inserted)
+now, for the update
+POST /storeQuestionsForSchool
+[
+  {
+    "id": 12,
+    "question": "AAAAAxxxxxxx",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1,
+    "question_for": "SCHOOL",
+    "school_id": "TestSchool"
+  },
+  {
+    "id": 13,
+    "question": "BBBxxxxxx",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1,
+    "question_for": "SCHOOL",
+    "school_id": "TestSchool"
+  }
+]
+returns
+[
+  {
+	"id": 14,
+	"question": "AAAAAxxxxxxx",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+	"id": 15,
+	"question": "BBBxxxxxx",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	}
+]
+also... updated (well, reinserted - IDs are new, but it's just how it works)
+
+
+ok, lets test update + insert new one
+POST /storeQuestionsForSchool
+[
+  {
+	"id": 14,
+	"question": "AAAAAyyyyy",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+	"id": 15,
+	"question": "BBByyyyy",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+    "id": null,
+    "question": "CCCCyyyyy",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1,
+    "question_for": "SCHOOL",
+    "school_id": "TestSchool"
+  }
+]
+returns
+[
+  {
+	"id": 16,
+	"question": "AAAAAyyyyy",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+	"id": 17,
+	"question": "BBByyyyy",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	},
+  {
+	"id": 18,
+	"question": "CCCCyyyyy",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	}
+]
+
+also passed this test
+
+ok, now we try deleting some answers (with update for the remaining one)
+POST /storeQuestionsForSchool
+[
+  {
+    "id": 18,
+    "question": "CCCCzzzzzz",
+    "options": "{type:text,options:[]}",
+    "show_if": null,
+    "show_if_value": null,
+    "ordnum": 1,
+    "question_for": "SCHOOL",
+    "school_id": "TestSchool"
+  }	
+]
+returns
+[
+  {
+	"id": 19,
+	"question": "CCCCzzzzzz",
+	"options": "{type:text,options:[]}",
+	"show_if": null,
+	"show_if_value": null,
+	"ordnum": 1,
+	"question_for": "SCHOOL",
+	"school_id": "TestSchool"
+	}
+]
+
+and now I test to delete everything I have inserted
+POST /storeQuestionsForSchool
+[
+]
+returns
+[]
+and the questions are deleted....
+
+so.... It seems that there is nothing wrong?

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-appengine:run</actionName>
+            <displayName>appengine:run</displayName>
+            <goals>
+                <goal>appengine:run</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-appengine:run -X</actionName>
+            <displayName>appengine:run -X</displayName>
+            <goals>
+                <goal>appengine:run</goal>
+                <goal>-X</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-appengine:deploy</actionName>
+            <displayName>appengine:deploy</displayName>
+            <goals>
+                <goal>appengine:deploy</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-appengine:deploy -X</actionName>
+            <displayName>appengine:deploy -X</displayName>
+            <goals>
+                <goal>appengine:deploy</goal>
+                <goal>-X</goal>
+            </goals>
+        </action>
+    </actions>
