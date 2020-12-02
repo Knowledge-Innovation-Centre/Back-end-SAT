@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        
+    
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/mvc 
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security.xsd" 
+        xmlns:context="http://www.springframework.org/schema/context">
+    
+    <!--context:component-scan base-package="org.springframework.docs.test" /-->
+    <context:component-scan base-package="com.sat.security" /> 
+   <!--global-method-security pre-post-annotations="enabled" secured-annotations="enabled" jsr250-annotations="enabled" /-->
+   <!--global-method-security pre-post-annotations="enabled" /-->    
+   
+    <!--global-method-security
+        secured-annotations="enabled" pre-post-annotations="enabled">
+        <expression-handler ref="expressionHandler" />
+    </global-method-security-->
+    
+    <global-method-security pre-post-annotations="enabled" />
+    
+ 
+   
+    
+   <!--http use-expressions="true">
+      
+      <intercept-url pattern="/json/login/{username}/{password}" access="permitAll()" />
+      <intercept-url pattern="/**" access="isAuthenticated()" />
+ 
+      <form-login
+         login-page='/json/login//'
+         default-target-url="/homepage.html"
+         authentication-failure-url="/login.html?error=true" />
+ 
+      <logout logout-success-url="/login.html" />
+ 
+   </http-->
+   
+
+   
+   <authentication-manager alias="authenticationManager">
+      <authentication-provider ref="customAuthenticationProvider">
+                                        <!--user-service>
+                                           <user name="user1" password="user1Pass" authorities="ROLE_USER" />
+                                        </user-service-->
+      </authentication-provider>
+   </authentication-manager>
+   
+</beans:beans>

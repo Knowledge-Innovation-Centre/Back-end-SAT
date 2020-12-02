@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Hello AngularJS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+                <script src="greeting.js"></script>
+                <script>
+                    var loginApp = angular.module("loginApp", []);
+                    
+                    loginApp.controller("loginCtrl", ['$scope', '$http', function($scope, $http) {
+                            
+                            $scope.addRowAsyncAsJSON = function(){		
+                                    	
+                                    var dataObj = {
+                                                    username : $scope.username,
+                                                    password : $scope.password
+                                    };	
+                                    var res = $http.post('/login', dataObj);
+                                    res.success(function(data, status, headers, config) {
+                                            //$scope.message = data;
+                                            alert( "Success message: " + JSON.stringify({data: data}));
+                                    });
+                                    res.error(function(data, status, headers, config) {
+                                            alert( "failure message: " + JSON.stringify({data: data}));
+                                    });	
+                            };
+                    }]);                   
+                    
+                </script>
+	</head>
+
+	<body>
+
+            
+                <div ng-app="loginApp" ng-controller="loginCtrl">
+                    <p>Username: <input type="text" ng-model="username"></p>
+                    <h1>Username: {{username}}</h1>
+                    <p>Password: <input type="text" ng-model="password"></p>
+                    <h1>Password: {{password}}</h1>
+		</div>
+            
+		<div ng-app="demo" ng-controller="Hello">
+			<p>The ID is {{greeting.id}}</p>
+			<p>The content is {{greeting.content}}</p>
+		</div>
+                
+	</body>
+</html>

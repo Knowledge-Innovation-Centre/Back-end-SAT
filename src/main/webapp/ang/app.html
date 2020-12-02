@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="hr">
+    <head>
+        <title>SAT-frontend test app</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        
+        <link type="text/css" href="./css/bootstrap.min.css" rel="stylesheet">
+        <link type="text/css" href="./css/font-awesome.css" rel="stylesheet">
+        <link type="text/css" href="./css/iCheck_custom.css" rel="stylesheet">
+        <link type="text/css" href="./css/animate.css" rel="stylesheet">
+        <link type="text/css" href="./css/style.css" rel="stylesheet">
+        <link type="text/css" href="./css/awesome-bootstrap-checkbox.css" rel="stylesheet">
+        
+        <!--link href="./css/bootstrap-chosen.css" rel="stylesheet"-->
+        <!--link href="./css/footable.core.css" rel="stylesheet"-->
+        
+        <link rel="stylesheet" type="text/css" href="./css/app.css">
+
+        
+
+    </head>
+    <body class="pace-done">
+        
+        <dn-login loginurl="../json/login" currentuserurl="../json/currentUser" logouturl="../json/logout"></dn-login>
+        
+        <div id="wrapper" style="visibility: hidden">
+            
+            <!-- left side = navigation -->
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                
+                <div class="sidebar-collapse">
+                    <ul class="nav metismenu" id="side-menu">
+                        
+                        <!-- login compoment -->
+                        <li class="nav-header" dn-loginprofile>
+                            <div class="dropdown profile-element">
+                                <span><img dn-login-image alt="image" class="img-circle" src="./img/profile_small.jpg"></span>
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="clear">
+                                        <span class="block m-t-xs"><strong class="font-bold" dn-login-name><!--David Williams--></strong></span> 
+                                        <span class="text-muted text-xs block"><span dn-login-title><!--Art Director --></span><b class="caret"></b></span>
+                                    </span> 
+                                </a>
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <!--li><a href="profile.html">Profile</a></li>
+                                    <li><a href="contacts.html">Contacts</a></li>
+                                    <li><a href="mailbox.html">Mailbox</a></li>
+                                    <li class="divider"></li-->
+                                    <li dn-menuitem="mnuSelfcare"><a>Profil</a></li>
+                                    <li><a dn-logoutlink>Odjava</a></li>
+                                </ul>
+                            </div>
+                            <div class="logo-element">
+                                IN+
+                            </div>
+                        </li>
+                    </ul>
+                    <!-- navigation component -->
+                    <dn-menu></dn-menu>
+
+                </div>
+            </nav>
+            
+            
+            <!-- page center = content -->
+            <div id="page-wrapper" class="gray-bg">
+                
+                <!-- top bar // hamburger za show/hide menu + search & logout link-->
+                <div class="row border-bottom">
+                    
+                    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                        
+                        <!-- hamburger menu + search (hidden)-->
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                            <!--form role="search" class="navbar-form-custom" action="search_results.html">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
+                                </div>
+                            </form-->
+                        </div>
+                        
+                        <!-- top menu -->
+                        <ul class="nav navbar-top-links navbar-right">
+                            <!-- logout link -->
+                            <li>
+                                <a dn-logoutlink>
+                                    <i class="fa fa-sign-out"></i> Odjava
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                
+                <!-- mnuTest -->
+                <div dn-menuaction="mnuHome" class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>Home</h2>
+                        <ol class="breadcrumb">
+                            <li dn-menuitem="mnuHome"><a>Home</a></li>
+                            <li class="active"><strong>Test</strong></li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                </div>
+                <div dn-menuaction="mnuHome" class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row">
+                        <dn-split id="studyProgramsSplit" class="col-lg-12">
+                            <div dn-left><label>Study programs</label>
+                            
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Study programs</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <dn-table id="studyPrograms_table" 
+                                                  dataurl="../json/listStudyPrograms" 
+                                                  columns="id,name,description" 
+                                                  editformid="studyPrograms_Editform" 
+                                                  pagesize="10" onClick="return studyProgramsSelected()">
+                                        </dn-table>
+                                        <!--
+                                            private int id;
+                                            private String name;
+                                            private String description;
+                                            private List<StudyModule> studyModules;
+                                            private List<StudyCompetence> studyCompetences;
+                                        -->
+                                        <script>
+                                            function studyProgramsSelected(e){
+                                                console.log(e);
+                                                var sp=document.querySelector('#studyProgramsSplit');
+                                                if (sp) sp.activatepannel="right";
+                                            }
+                                        </script>
+                                    </div>         
+                                </div>
+                            </div>
+                            <div dn-right><label>Edit - Study programs</label>
+                                
+                        
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h5>Study programs</h5>
+                                            </div>
+                                            <div class="ibox-content">
+                                                <dn-editform id="studyPrograms_Editform" 
+                                                             inserturl="../json/createStudyProgram" 
+                                                             updateurl="../json/editStudyProgram" 
+                                                             deleteurl="../json//deleteStudyProgram/{studyprogram_id}" 
+                                                             tableform="studyPrograms_table">
+                                                    
+                                                        <div class="row"
+                                                             <div class="col-lg-12">
+                                                                 <form class="form-horizontal">
+                                                                        <input dn-input="studyPrograms_Editform" dn-primaryfield="" name="id" type="hidden" required placeholder=""> 
+
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-4 control-label">Name</label>
+                                                                            <div class="col-lg-8">
+                                                                                <input dn-input="studyPrograms_Editform" name="name" type="text" min="0" step="0.01" required placeholder="" class="form-control"> 
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-4 control-label">Description</label>
+                                                                            <div class="col-lg-8">
+                                                                                <input dn-input="studyPrograms_Editform" name="description" type="text" required placeholder="" class="form-control"></div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class=" text-center col-lg-12">
+                                                                                <button dn-editform-new="studyPrograms_Editform" class="btn btn-primary" type="button">Novi</button>
+                                                                                <button dn-editform-cancel="studyPrograms_Editform" class="btn btn-primary" type="button">Odustani</button>
+                                                                                <button dn-editform-save="studyPrograms_Editform" class="btn btn-primary" type="button">Spremi</button>
+                                                                                <!--button dn-editform-delete="studyPrograms_Editform" class="btn btn-primary" type="button">Obriši</button-->
+                                                                            </div>
+                                                                        </div>
+                                                                   </form>
+                                                            </div>
+                                                        </div>
+                                                 
+
+                                                        <div class="row"
+                                                             <div class="col-lg-12">
+
+                                                                    <dn-tab>
+                                                                        <div dn-tab desc="StudyModule">
+
+                                                                                        <div class="ibox float-e-margins">
+                                                                                            <div class="ibox-title">
+                                                                                                <h5>StudyModule</h5>
+                                                                                            </div>
+                                                                                            <div class="ibox-content">
+                                                                                                <dn-table id="StudyModule_TABLE" 
+                                                                                                      columns="id,name,description" 
+                                                                                                      template="StudyModule_controlstemplate"
+                                                                                                      dn-input="studyPrograms_Editform"
+                                                                                                      dn-object
+                                                                                                      name="studyModules"
+                                                                                                      pagesize="10">
+                                                                                                </dn-table>
+                                                                                                <div id="StudyModule_controlstemplate" style="display:none">
+                                                                                                    <input name="id" type="text" class="form-control">
+                                                                                                    <input name="name" type="text" class="form-control">
+                                                                                                    <input name="description" type="text" class="form-control">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                         </div>
+                                                                        </div>
+                                                                        <div dn-tab desc="StudyCompetence">
+
+                                                                                        <div class="ibox float-e-margins">
+                                                                                            <div class="ibox-title">
+                                                                                                <h5>StudyCompetence</h5>
+                                                                                            </div>
+                                                                                            <div class="ibox-content">
+                                                                                                <dn-table id="StudyCompetence_TABLE" 
+                                                                                                      columns="id,name,description" 
+                                                                                                      template="StudyCompetence_controlstemplate"
+                                                                                                      dn-input="studyPrograms_Editform"
+                                                                                                      dn-object
+                                                                                                      name="studyModules"
+                                                                                                      pagesize="10">
+                                                                                                </dn-table>
+                                                                                                <div id="StudyCompetence_controlstemplate" style="display:none">
+                                                                                                    <input name="id" type="text" class="form-control">
+                                                                                                    <input name="name" type="text" class="form-control">
+                                                                                                    <input name="description" type="text" class="form-control">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                         </div>
+                                                                        </div>
+                                                                    </dn-tab>
+                                                                        
+                                                                 
+                                                            </div>
+                                                        </div>
+                                                        
+                                                                                               
+                                                    
+                                                    
+                                                    
+                                                </dn-editform>
+
+                                            </div>
+                                        </div>
+                            </div>
+                            
+                        </dn-split>
+                    </div>
+                </div>
+                
+
+                
+                <!-- mnuAdministracija -->
+                <div dn-menuaction="mnuAdministracija" class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>Administracija</h2>
+                        <ol class="breadcrumb">
+                            <li dn-menuitem="mnuHome"><a>Home</a></li>
+                            <li class="active"><strong>Upravljanje korisnicima</strong></li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                </div>
+                <div dn-menuaction="mnuAdministracija" class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Podaci o korisniku</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <dn-editform id="userEditform" inserturl="../json/createUser" updateurl="../json/modifyUser" deleteurl="../json/deleteUser" tableform="userstable">
+                                        <form class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ime</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="userEditform" name="name" type="text" required placeholder="" class="form-control"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Prezime</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="userEditform" name="surname" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Titula</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="userEditform" name="title" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Korisničko ime</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="userEditform" dn-primaryfield="" name="username" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Lozinka</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="userEditform" name="password" type="password" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Korisničke uloge</label>
+                                                <div class="col-lg-8">
+                                                    <dn-multicheck dn-input="userEditform" 
+                                                                   dn-object name="roles" 
+                                                                   listoptions="../json/listRoles" disabled required>
+                                                    </dn-multicheck>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-4 col-lg-8">
+                                                    <button dn-editform-new="userEditform" class="btn btn-primary" type="button">Novi</button>
+                                                    <button dn-editform-cancel="userEditform" class="btn btn-primary" type="button">Odustani</button>
+                                                    <button dn-editform-save="userEditform" class="btn btn-primary" type="button">Spremi</button>
+                                                    <button dn-editform-delete="userEditform" class="btn btn-primary" type="button">Obriši</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </dn-editform>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Popis korisnika aplikacije</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <dn-table id="userstable" 
+                                              dataurl="../json/listUsers" 
+                                              columns="name,surname,title,username" 
+                                              editformid="userEditform" 
+                                              pagesize="10">
+                                    </dn-table>
+                                </div>         
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                
+                
+                <!-- mnuSelfcare -->
+                <div dn-menuaction="mnuSelfcare" class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>Administracija</h2>
+                        <ol class="breadcrumb">
+                            <li dn-menuitem="mnuHome"><a>Home</a></li>
+                            <li class="active"><strong>Profil korisnika</strong></li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                </div>
+                <div dn-menuaction="mnuSelfcare" class="wrapper wrapper-content animated fadeInRight">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>Promjena lozinke</h5>
+                                </div>
+                                <div class="ibox-content">
+                                    <dn-editform id="selfcareEdit" updateurl="../json/modifyUserPassword">
+                                        <form class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ime</label>
+                                                <div class="col-lg-8">
+                                                    <input readonly dn-input="selfcareEdit" name="name" type="text" required placeholder="" class="form-control"> 
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Prezime</label>
+                                                <div class="col-lg-8">
+                                                    <input readonly dn-input="selfcareEdit" name="surname" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Titula</label>
+                                                <div class="col-lg-8">
+                                                    <input readonly dn-input="selfcareEdit" name="title" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Korisničko ime</label>
+                                                <div class="col-lg-8">
+                                                    <input readonly dn-input="selfcareEdit" dn-primaryfield="" name="username" type="text" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Lozinka</label>
+                                                <div class="col-lg-8">
+                                                    <input dn-input="selfcareEdit" name="password" type="password" required placeholder="" class="form-control"></div>
+                                            </div>
+                                            <!--div class="form-group">
+                                                <label class="col-lg-4 control-label">Korisničke uloge</label>
+                                                <div class="col-lg-8">
+                                                    <dn-multicombo dn-input dn-object name="roles" listoptions="../json/listRoles" required>
+                                                    </dn-multicombo>
+                                                </div>
+                                            </div-->
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-4 col-lg-8">
+                                                    <!--button dn-editform-new class="btn btn-primary" type="button">Novi</button-->
+                                                    <!--button dn-editform-cancel class="btn btn-primary" type="button">Odustani</button-->
+                                                    <button dn-editform-save="selfcareEdit" class="btn btn-primary" type="button">Spremi</button>
+                                                    <!--button dn-editform-delete class="btn btn-primary" type="button">Obriši</button-->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </dn-editform>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="ibox float-e-margins">
+                                     
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+                
+                
+                
+                <!--page footer-->
+                <div class="footer">
+                    <!--div class="pull-right">
+                        10GB of <strong>250GB</strong> Free.
+                    </div-->
+                    <div class="pull-right">
+                        <strong>Copyright</strong> Inteling 2019
+                    </div>
+                </div>
+        
+            </div>
+            
+        </div>
+        
+        <script type="module" src="./js/app.js"></script>
+        <!--script type="text/javascript" src="./js/app.js"></script-->
+        
+        <!-- Mainly scripts -->
+        <!--script src="./js/ext/jquery-3.1.1.min.js"></script-->
+        <script type="text/javascript" src="./js/ext/popper.min.js"></script>
+        <script type="text/javascript" src="./js/ext/bootstrap.js"></script>
+        <script type="text/javascript" src="./js/ext/jquery.metisMenu.js"></script>
+        <script type="text/javascript" src="./js/ext/jquery.slimscroll.min.js"></script>
+
+        <!-- Custom and plugin javascript -->
+        <script type="text/javascript" src="./js/ext/inspinia.js"></script>
+        <script type="text/javascript" src="./js/ext/pace.min.js"></script>
+
+        <!-- iCheck -->
+        <script type="text/javascript" src="./js/ext/icheck.min.js"></script>
+        <!--script>
+            $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            });
+        </script-->  
+        
+        <!--script src="./js/ext/chosen.jquery.js" type="text/javascript"></script-->
+        <!--script src="./js/ext/chosen.init.js" type="text/javascript" charset="utf-8"></script-->
+        
+        <!--script src="./js/ext/footable.all.min.js" type="text/javascript"></script-->
+
+        <!--script>
+            $(document).ready(function() {
+                
+                $('.footable').footable();
+
+            });
+
+        </script-->
+    </body>
+</html>

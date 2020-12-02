@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <template id="x-foo-mylogin-template">
+            
+        </template>
+        <script>
+            let tmpl = document.querySelector('#x-foo-mylogin-template');
+            
+            class MyLogin extends HTMLElement{
+                constructor(){
+                    super();
+                    let shadowRoot = this.attachShadow({mode: 'open'});
+                    shadowRoot.appendChild(tmpl.content.cloneNode(true));
+                }
+                static get observedAttributes() {
+                    return ['username', 'password', 'school_id'];
+                }
+                attributeChangedCallback(name, oldValue, newValue){
+                    if (name.equals("username")){
+                        
+                    }
+                    if (name.equals("password")){
+                        
+                    }
+                    if (name.equals("school_id")){
+                        
+                    }
+                }
+                connectedCallback() {
+                    this.innerHTML = "<b>I'm an x-foo-with-markup!</b>";
+                }
+            }
+            customElements.define('my-login', MyLogin);
+        </script>
+        <my-login></my-login>
+    </body>
+</html>

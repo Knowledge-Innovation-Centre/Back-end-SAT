@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+ 
+    <mvc:annotation-driven />
+    <context:component-scan base-package="com.sat.controllers" />
+    <context:component-scan base-package="com.sat.jdbc" />
+    <context:component-scan base-package="com.sat.entity.servicebeans" />
+    <context:component-scan base-package="com.sat.entity.dao" />
+    <!--context:component-scan base-package="com.nizetic.securuty" /-->
+    <!--context:component-scan base-package="com.nizetic.jdbc" /-->
+ 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    
+    <!--bean id="userService" class="com.nizetic.entity.servicebeans.UserService"/>
+    <bean id="userDao" class="com.nizetic.entity.dao.UserDao">
+        
+    </bean--><!--property name="dataSource" ref="dataSource"/-->
+
+    
+    <!--bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+        <property name="username" value="system" />
+        <property name="password" value="oracle" />
+    </bean-->
+ 
+</beans>

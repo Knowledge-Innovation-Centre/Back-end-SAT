@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            var currentUser=null;
+                $(document).ready(function(){
+                    $(".logoutform").hide();
+                    $("#loginbtn").click(function(){
+                        var u=$("input[name=username]").val();
+                        var p=$("input[name=password]").val();
+                        var data=JSON.stringify({
+                            username:u,
+                            password:p
+                        });
+
+                        $(".loginform .result").html("Wait for it...!");
+
+                        jQuery.ajax ({
+                            //url: "/mvnSWP/json/login",
+                            //url: "/FluidGPS/json/login",
+                            url: "http://ovh.nizetic.hr:8080/SAT-backend/json/login",
+                            type: "POST",
+                            data: data,
+                            dataType: "json",
+                            contentType: "application/json; charset=utf-8",
+                            success: function(result,status,xhr){
+                                currentUser=result
+                                $(".logoutform .result").html(currentUser.username);
+                                $(".logoutform").show();
+                                $(".loginform").hide();
+                            },
+                            error: function(status){
+                                $(".loginform .result").html(status);
+                            }//(xhr,status,error)
+                        });
+
+                    });
+                
+                $("#logoutbtn").click(function(){
+                    
+                    $(".logoutform .result").html("Wait for it...!");
+            
+                    jQuery.ajax ({
+                        //url: "/mvnSWP/json/logout",
+                        //url: "/FluidGPS/json/logout",
+                        url: "http://ovh.nizetic.hr:8080/SAT-backend/json/logout",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function(result,status,xhr){
+                            currentUser=null;
+                            $(".loginform .result").html(xhr.status);
+                            $(".logoutform").hide();
+                            $(".loginform").show();
+                        },
+                        error: function(status){
+                            $(".loginform .result").html(status);
+                        }//(xhr,status,error)
+                    });
+
+                });
+            });
+        </script>
+        <style>
+            .loginform{
+                width:200px;
+            }
+            .loginform .label{
+                display:inline-block;
+                width:96px;
+            }
+            .loginform input[type=text]{
+                width:100px;
+            }
+            .loginform input[type=button]{
+                width:200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            current user: <label id="currentUser"></label>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#currentUser").html="čekaj malo";
+            
+                    jQuery.ajax ({
+                        //url: "/mvnSWP/json/login",
+                        //url: "/FluidGPS/json/login",
+                        url: "http://ovh.nizetic.hr:8080/SAT-backend/json/currentUser",
+                        type: "GET",
+                        data: "",
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function(result,status,xhr){
+                            
+                            $("#currentUser").html=result;
+                            
+                            
+                        },
+                        error: function(status){
+                            $("#currentUser").html=status;
+                        }//(xhr,status,error)
+                    });
+                }
+            );
+        </script>
+        <div class="loginform">
+            <span class="label">Username:</span><input type="text" name="username">
+            <span class="label">Password:</span><input type="text" name="password">
+            <input id="loginbtn" type="button" name="submit" value="Login">
+            <span class="result"></span>
+        </div>
+        <div class="logoutform">
+            <input id="logoutbtn" type="button" name="submit" value="Logout">
+            <span class="result"></span>
+        </div>
+        
+        <br><br><br><br>
+        
+        <form method="POST" action="/SAT-backend/uploadFile" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><label>Select a file to upload</label></td>
+                    <td><input type="file" name="file" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Submit" /></td>
+                </tr>
+            </table>
+        </form>
+
+    </body>
+</html>
